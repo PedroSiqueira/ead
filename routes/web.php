@@ -21,6 +21,7 @@ Route::get('/disciplinas', 'DisciplinaController@readAll');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verificaMail');
 
+
 //Route::middleware(['professor'])->group(function () {
 //    Route::get('/noticia/update/{id}', 'NoticiaController@update');
 //
