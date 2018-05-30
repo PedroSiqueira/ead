@@ -21,7 +21,7 @@ Route::get('/disciplinas', 'DisciplinaController@readAll');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verificaMail');
 
-Route::middleware(['professor'])->group(function () {
+//Route::middleware(['professor'])->group(function () {
 
 //    Route::get('/noticia/update/{id}', 'NoticiaController@update');
 //
@@ -32,4 +32,4 @@ Route::middleware(['professor'])->group(function () {
 //    Route::view('/noticia/novo', 'noticia_formulario');
 //
 //    Route::post('/noticia/add', 'NoticiaController@create');
-});
+//});
