@@ -17,19 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/disciplinas', 'DisciplinaController@readAll');
+Route::get('/disciplinas', 'DisciplinaController@lerTodas');
+
+Route::get('/disciplina/ler/{id}', 'DisciplinaController@ler');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verificaMail');
 
-
-//Route::middleware(['professor'])->group(function () {
-//    Route::get('/noticia/update/{id}', 'NoticiaController@update');
-//
-//    Route::get('/noticia/delete/{id}', 'NoticiaController@delete');
-//
-//    Route::post('/noticia/save', 'NoticiaController@save');
-//
-//    Route::view('/noticia/novo', 'noticia_formulario');
-//
-//    Route::post('/noticia/add', 'NoticiaController@create');
-//});
+Route::middleware(['professor'])->group(function () {
+    Route::view('/disciplina/novo', 'disciplina.disciplina_formulario');
+    Route::post('/disciplina/criar', 'DisciplinaController@criar');
+    Route::get('/disciplina/editar/{id}', 'DisciplinaController@editar');
+    Route::post('/disciplina/salvar/{id}', 'DisciplinaController@salvar');
+//    Route::get('/disciplina/remover/{id}', 'DisciplinaController@remover');
+});

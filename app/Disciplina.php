@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Disciplina extends Model {
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nome', 'descricao', 'inicio', 'termino','user_id',
+    ];
+
+    /**
      * Get the user that owns the disciplina.
      */
     public function user() {
