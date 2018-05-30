@@ -26,7 +26,7 @@ use AuthenticatesUsers;
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/disciplinas';
 
     /**
      * Create a new controller instance.
