@@ -28,5 +28,5 @@ Route::middleware(['professor'])->group(function () {
     Route::post('/disciplina/criar', 'DisciplinaController@criar');
     Route::get('/disciplina/editar/{id}', 'DisciplinaController@editar');
     Route::post('/disciplina/salvar/{id}', 'DisciplinaController@salvar');
-//    Route::get('/disciplina/remover/{id}', 'DisciplinaController@remover');
+//   Route::get('/disciplina/remover/{id}', 'DisciplinaController@remover');
 });
