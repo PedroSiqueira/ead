@@ -25,5 +25,23 @@
             @endif
         </div>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @if($disciplinasAluno != null)
+            <div class="card">
+                <h5 class="card-header">Disciplinas matriculadas</h5>
+                <ul class="list-group list-group-flush">
+                    @foreach($disciplinasAluno as $disciplina)
+                    <li class="list-group-item">{{ $disciplina->nome }}
+                        <span class="float-right">
+                            <a href="/disciplina/ler/{{ $disciplina->id }}" class="btn btn-success"><i class="fas fa-eye"></i> Abrir</a>
+                        </span>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
+    </div>
 </div>
 @endsection

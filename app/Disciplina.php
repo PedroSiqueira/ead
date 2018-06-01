@@ -12,7 +12,7 @@ class Disciplina extends Model {
      * @var array
      */
     protected $fillable = [
-        'nome', 'descricao', 'inicio', 'termino','user_id',
+        'nome', 'descricao', 'inicio', 'termino', 'user_id',
     ];
 
     /**
@@ -20,6 +20,13 @@ class Disciplina extends Model {
      */
     public function user() {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * os alunos matriculados na disciplina
+     */
+    public function users() {
+        return $this->belongsToMany('App\User');
     }
 
 }

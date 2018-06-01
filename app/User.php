@@ -27,8 +27,22 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
-    public function disciplinas() {
-        return $this->hasMany('App\Disciplina');
+    /**
+     * todas as disciplinas que é professor
+     * @param type $order
+     * @param type $direction
+     * @return type
+     */
+    public function disciplinas($order = 'termino', $direction = 'desc') {
+        return $this->hasMany('App\Disciplina')->orderBy($order, $direction);
+    }
+
+    /**
+     * todas as disciplinas que é aluno
+     * @return type
+     */
+    public function matriculas() {
+        return $this->belongsToMany('App\Disciplina', 'disciplina_users');
     }
 
 }

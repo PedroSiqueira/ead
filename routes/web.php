@@ -11,15 +11,15 @@
   |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
+
+Route::get('/', 'DisciplinaController@lerDisponiveis');
 
 Route::get('/disciplinas', 'DisciplinaController@lerTodas');
 
 Route::get('/disciplina/ler/{id}', 'DisciplinaController@ler');
+
+Route::get('/disciplina/matricular/{id}', 'DisciplinaController@matricular');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verificaMail');
 
