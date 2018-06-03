@@ -12,13 +12,15 @@
             <label >Descrição</label>
             <textarea name="descricao" class="form-control" rows="3">{{ !empty($disciplina)? $disciplina->descricao : ''}}</textarea>
         </div>
-        <div class="form-group">
-            <label>Início</label>
-            <input name="inicio" class="form-control" type="date" value="{{ !empty($disciplina)? $disciplina->inicio : '' }}">
-        </div>
-        <div class="form-group">
-            <label>Término</label>
-            <input name="termino" class="form-control" type="date" value="{{ !empty($disciplina)? $disciplina->termino : '' }}">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Início</label>
+                <input name="inicio" class="form-control" type="date" value="{{ !empty($disciplina)? $disciplina->inicio : '' }}">
+            </div>
+            <div class="form-group">
+                <label>Término</label>
+                <input name="termino" class="form-control" type="date" value="{{ !empty($disciplina)? $disciplina->termino : '' }}">
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">{{ !empty($disciplina)? 'Salvar' : 'Criar' }}</button>
     </form>

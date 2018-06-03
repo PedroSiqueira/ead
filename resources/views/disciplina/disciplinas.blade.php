@@ -5,12 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             @if($disciplinasProfessor != null)
-            <div class="card">
+            <div class="card mb-3">
                 <h5 class="card-header">Disciplinas que ministro</h5>
                 <ul class="list-group list-group-flush">
                     @foreach($disciplinasProfessor as $disciplina)
                     <li class="list-group-item">{{ $disciplina->nome }}
                         <span class="float-right">
+                            @if($disciplina->novasInscricoes())
+                            <div class="alert alert-info d-inline">Novos inscritos!</div>
+                            @endif
                             <a href="/disciplina/ler/{{ $disciplina->id }}" class="btn btn-success"><i class="fas fa-eye"></i> Abrir</a>
                             <a href="/disciplina/editar/{{ $disciplina->id }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</a>
                             <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</a>
@@ -28,7 +31,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             @if($disciplinasAluno != null)
-            <div class="card">
+            <div class="card mb-3">
                 <h5 class="card-header">Disciplinas matriculadas</h5>
                 <ul class="list-group list-group-flush">
                     @foreach($disciplinasAluno as $disciplina)

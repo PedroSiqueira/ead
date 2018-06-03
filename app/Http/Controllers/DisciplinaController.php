@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Disciplina;
-use App\DisciplinaUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +13,8 @@ class DisciplinaController extends Controller {
         $dt = Carbon::now();
         $disciplinas = null;
         if (Auth::check()) {
-            $matriculadas = DisciplinaUser::select('disciplina_id')->where('user_id', Auth::user()->id)->get();
+            $matriculadas = Auth::user()->disciplinas->pluck('id')->toArray();
             $disciplinas = Disciplina::whereNotIn('id', $matriculadas)
-                            ->where('user_id', '<>', Auth::user()->id)
                             ->where('termino', '>=', Carbon::now()->toDateString())
                             ->orderBy('termino', 'desc')->paginate(3);
         } else {
@@ -27,51 +25,50 @@ class DisciplinaController extends Controller {
 
     public function ler($id) {
         $disciplina = Disciplina::find($id);
-        $matricula = 0; //0=nao inscrito; 1=inscrito e não matriculado; 2=inscrito e matriculado
+        $tipo = \App\Tipo::NAO_AUTENTICADO;
         if (Auth::check()) {
-            if ($disciplina->user_id == Auth::user()->id) {
-                $matricula = 2;
-            }
-            $matriculado = DisciplinaUser::select('matriculado')->where('user_id', Auth::user()->id)->where('disciplina_id', $disciplina->id)->first();
-            if ($matriculado == null) {
-                
-            } else if (!$matricula) {
-                $matricula = 1;
-            } else {
-                $matricula = 2;
-            }
+            $tipo = \App\DisciplinaUser::select('tipo')->where('user_id', Auth::user()->id)->where('disciplina_id', $disciplina->id)->pluck('tipo')->first();
         }
-        return view('disciplina.disciplina', ['disciplina' => $disciplina, 'matricula' => $matricula]);
+        return view('disciplina.disciplina', ['disciplina' => $disciplina, 'tipo' => $tipo]);
     }
 
     public function matricular($id) {
         if (!Auth::check()) {
             return redirect('/login')->with('warning', 'Você precisa se autenticar no site antes de matricular em uma disciplina.');
         }
-        $disciplina = Disciplina::find($id);
-        $du = new DisciplinaUser;
-        $du->disciplina_id = $disciplina->id;
+        $du = new \App\DisciplinaUser;
+        $du->disciplina_id = $id;
         $du->user_id = Auth::user()->id;
-        $du->created_at = Carbon::now();
+        $du->tipo = \App\Tipo::ALUNO_INSCRITO;
         $du->save();
-        return redirect('/disciplina/ler/' . $disciplina->id);
+        return redirect('/disciplina/ler/' . $id);
     }
 
     public function lerTodas() {
-        $disciplinasAluno = null;
-        $disciplinasProfessor = null;
+        $disciplinas = [];
+        $disciplinasProfessor = [];
+        $disciplinasAluno = [];
         if (Auth::check()) {
-            if (Auth::user()->professor) {
-                $disciplinasProfessor = Auth::user()->disciplinas;
+            $disciplinas = Auth::user()->disciplinas;
+        }
+        foreach ($disciplinas as $disciplina) {
+            if ($disciplina->pivot->tipo == \App\Tipo::PROFESSOR) {
+                $disciplinasProfessor[] = $disciplina;
+            } else if ($disciplina->pivot->tipo == \App\Tipo::ALUNO_INSCRITO || $disciplina->pivot->tipo == \App\Tipo::ALUNO_MATRICULADO) {
+                $disciplinasAluno[] = $disciplina;
             }
-            $disciplinasAluno = Auth::user()->matriculas;
         }
 
         return view('disciplina.disciplinas', ['disciplinasAluno' => $disciplinasAluno, 'disciplinasProfessor' => $disciplinasProfessor]);
     }
 
     public function criar(Request $request) {
-        $disciplina = Disciplina::create($request->all() + ['user_id' => Auth::user()->id]);
+        $disciplina = Disciplina::create($request->all());
+        $du = new \App\DisciplinaUser;
+        $du->disciplina_id = $disciplina->id;
+        $du->user_id = Auth::user()->id;
+        $du->tipo = \App\Tipo::PROFESSOR;
+        $du->save();
         return redirect('/disciplina/ler/' . $disciplina->id);
     }
 

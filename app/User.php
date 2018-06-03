@@ -28,21 +28,11 @@ class User extends Authenticatable {
     ];
 
     /**
-     * todas as disciplinas que é professor
-     * @param type $order
-     * @param type $direction
+     * todas as disciplinas que participa
      * @return type
      */
-    public function disciplinas($order = 'termino', $direction = 'desc') {
-        return $this->hasMany('App\Disciplina')->orderBy($order, $direction);
-    }
-
-    /**
-     * todas as disciplinas que é aluno
-     * @return type
-     */
-    public function matriculas() {
-        return $this->belongsToMany('App\Disciplina', 'disciplina_users');
+    public function disciplinas() {
+        return $this->belongsToMany('App\Disciplina')->withPivot('tipo');
     }
 
 }

@@ -19,7 +19,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 1',
             'inicio' => $dt->copy()->subMonth(2),
             'termino' => $dt->copy()->subMonth(1),
-            'user_id' => 1,
         ]);
 
         DB::table('disciplinas')->insert([
@@ -28,7 +27,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 2',
             'inicio' => $dt->copy()->subMonth(2),
             'termino' => $dt,
-            'user_id' => 1,
         ]);
 
         DB::table('disciplinas')->insert([
@@ -37,7 +35,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 3',
             'inicio' => $dt,
             'termino' => $dt,
-            'user_id' => 1,
         ]);
 
         DB::table('disciplinas')->insert([
@@ -46,7 +43,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 4',
             'inicio' => $dt,
             'termino' => $dt->copy()->addMonth(1),
-            'user_id' => 1,
         ]);
 
         DB::table('disciplinas')->insert([
@@ -55,7 +51,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 5',
             'inicio' => $dt->copy()->addMonth(1),
             'termino' => $dt->copy()->addMonth(2),
-            'user_id' => 1,
         ]);
 
         DB::table('disciplinas')->insert([
@@ -64,7 +59,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 6',
             'inicio' => $dt->copy()->addMonth(2),
             'termino' => $dt->copy()->addMonth(4),
-            'user_id' => 1,
         ]);
 
         DB::table('disciplinas')->insert([
@@ -73,7 +67,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 7',
             'inicio' => $dt->copy()->addMonth(4),
             'termino' => $dt->copy()->addMonth(4),
-            'user_id' => 1,
         ]);
 
         DB::table('disciplinas')->insert([
@@ -82,7 +75,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 8',
             'inicio' => $dt,
             'termino' => $dt->copy()->addMonth(4),
-            'user_id' => 2,
         ]);
 
         DB::table('disciplinas')->insert([
@@ -91,7 +83,6 @@ class DisciplinaSeeder extends Seeder {
             'descricao' => 'Descrição da <strong>disciplina</strong> de número 9',
             'inicio' => $dt->copy()->addMonth(2),
             'termino' => $dt->copy()->addMonth(4),
-            'user_id' => 2,
         ]);
     }
 

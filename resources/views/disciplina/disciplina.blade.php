@@ -3,12 +3,19 @@
 @section('content')
 <div class="container">
     <h1>{{ $disciplina->nome }}</h1>
-    <p>Professor: {{ $disciplina->user->name }} • Data de início: {{ $disciplina->inicio }} • Data de término: {{ $disciplina->termino }}</p>
+    @if($disciplina->novasInscricoes() && Auth::user()->professor)
+    <div class="alert alert-info">
+        Novos inscritos! Acesse o menu <a href="">Participantes</a> para aceitá-los.
+    </div>
+    @endif
+    <p>Professor: {{ $disciplina->professor()->name }} • Data de início: {{ $disciplina->inicio }} • Data de término: {{ $disciplina->termino }}</p>
     <h3>{!!html_entity_decode($disciplina->descricao)!!}</h3>
-    @if($matricula==0)
-    <a href="/disciplina/matricular/{{ $disciplina->id }}" class="btn btn-primary">Matricular na Disciplina</a>
-    @elseif($matricula==1)
+    @if(Auth::guest())
+    <div class="alert alert-warning">Você precisa se <a href="/login">autenticar</a> e estar matriculado para acessar o conteúdo da disciplina...</div>
+    @elseif($tipo==\App\Tipo::ALUNO_INSCRITO)
     <div class="alert alert-warning">Inscrição realizada com sucesso! Aguarde o professor aceitar tua matrícula...</div>
+    @elseif($tipo==\App\Tipo::NAO_INSCRITO)
+    <a href="/disciplina/matricular/{{ $disciplina->id }}" class="btn btn-primary">Matricular na Disciplina</a>
     @endif
 </div>
 @endsection

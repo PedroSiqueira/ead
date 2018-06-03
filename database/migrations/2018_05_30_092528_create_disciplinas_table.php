@@ -18,8 +18,6 @@ class CreateDisciplinasTable extends Migration {
             $table->string('descricao', 4096)->nullable();
             $table->date('inicio');
             $table->date('termino');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

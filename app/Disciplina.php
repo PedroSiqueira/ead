@@ -12,21 +12,25 @@ class Disciplina extends Model {
      * @var array
      */
     protected $fillable = [
-        'nome', 'descricao', 'inicio', 'termino', 'user_id',
+        'nome', 'descricao', 'inicio', 'termino',
     ];
 
     /**
-     * Get the user that owns the disciplina.
+     * o professor da disciplina
      */
-    public function user() {
-        return $this->belongsTo('App\User');
+    public function professor() {
+        return $this->belongsToMany('App\User')->wherePivot('tipo', Tipo::PROFESSOR)->first();
     }
 
     /**
-     * os alunos matriculados na disciplina
+     * todos os inscritos na disciplina (professor e alunos)
      */
     public function users() {
         return $this->belongsToMany('App\User');
+    }
+
+    public function novasInscricoes() {
+        return \App\DisciplinaUser::where('tipo', \App\Tipo::ALUNO_INSCRITO)->where('disciplina_id', $this->id)->first() != null;
     }
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDisciplinaUsersTable extends Migration {
+class CreateDisciplinaUserTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateDisciplinaUsersTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('disciplina_users', function (Blueprint $table) {
+        Schema::create('disciplina_user', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('disciplina_id');
             $table->foreign('disciplina_id')->references('id')->on('disciplinas');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->boolean('matriculado')->default(false);
+            $table->tinyInteger('tipo');
             $table->timestamps();
         });
     }
