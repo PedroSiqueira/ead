@@ -1,14 +1,25 @@
 @extends('layouts.app')
 
+@section('sidebar')
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+@endsection
+
 @section('content')
 <div class="container">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
     <h1>{{ $disciplina->nome }}</h1>
-    @if($disciplina->novasInscricoes() && Auth::user()->professor)
+    @if(Auth::check() && Auth::user()->professorDaDisciplina($disciplina->id) && $disciplina->novasInscricoes())
     <div class="alert alert-info">
-        Novos inscritos! Acesse o menu <a href="">Participantes</a> para aceitá-los.
+        Novos inscritos! Acesse o menu <a href="#">Participantes</a> para aceitá-los.
     </div>
     @endif
-    <p>Professor: {{ $disciplina->professor()->name }} • Data de início: {{ $disciplina->inicio }} • Data de término: {{ $disciplina->termino }}</p>
+    <p>Professor: {{ $disciplina->professor()->name }} • Data de início: {{ strftime('%d/%m/%Y', time($disciplina->inicio)) }} • Data de término: {{ strftime('%d/%m/%Y', time($disciplina->termino)) }}</p>
     <h3>{!!html_entity_decode($disciplina->descricao)!!}</h3>
     @if(Auth::guest())
     <div class="alert alert-warning">Você precisa se <a href="/login">autenticar</a> e estar matriculado para acessar o conteúdo da disciplina...</div>
@@ -18,4 +29,18 @@
     <a href="/disciplina/matricular/{{ $disciplina->id }}" class="btn btn-primary">Matricular na Disciplina</a>
     @endif
 </div>
+@endsection
+
+@section('script')
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+</script>
 @endsection

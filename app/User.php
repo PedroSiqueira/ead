@@ -35,4 +35,8 @@ class User extends Authenticatable {
         return $this->belongsToMany('App\Disciplina')->withPivot('tipo');
     }
 
+    public function professorDaDisciplina($id) {
+        return DisciplinaUser::where('user_id', $this->id)->where('disciplina_id', $id)->where('tipo', Tipo::PROFESSOR)->first() != null;
+    }
+
 }

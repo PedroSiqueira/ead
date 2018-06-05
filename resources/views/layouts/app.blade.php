@@ -12,6 +12,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -20,6 +21,9 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        <!-- Estilo para o menu lateral -->
+        <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -73,9 +77,13 @@
                 </div>
             </nav>
 
+            @yield('sidebar')
+
             <main class="py-4">
                 @yield('content')
             </main>
         </div>
+
+        @yield('script')
     </body>
 </html>
