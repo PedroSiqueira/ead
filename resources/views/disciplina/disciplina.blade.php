@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@if(Auth::check() && ($tipo == \App\Tipo::PROFESSOR || $tipo == \App\Tipo::ALUNO_MATRICULADO))
 @section('sidebar')
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -10,9 +11,13 @@
 </div>
 @endsection
 
+@section('sidebarMenuButton')
+<button id='sidebarMenuButton' class="btn btn-outline-primary" onclick="openNav()">&#9776; Menu</button>
+@endsection
+@endif
+
 @section('content')
 <div class="container">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
     <h1>{{ $disciplina->nome }}</h1>
     @if(Auth::check() && Auth::user()->professorDaDisciplina($disciplina->id) && $disciplina->novasInscricoes())
     <div class="alert alert-info">
@@ -33,11 +38,13 @@
 
 @section('script')
 <script>
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
     }
 
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
