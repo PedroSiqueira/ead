@@ -33,4 +33,12 @@ class Disciplina extends Model {
         return \App\DisciplinaUser::where('tipo', \App\Tipo::ALUNO_INSCRITO)->where('disciplina_id', $this->id)->first() != null;
     }
 
+    public function inscritos() {
+        return $this->belongsToMany('App\User')->wherePivot('tipo', Tipo::ALUNO_INSCRITO)->get();
+    }
+
+    public function matriculados() {
+        return $this->belongsToMany('App\User')->wherePivot('tipo', Tipo::ALUNO_MATRICULADO)->get();
+    }
+
 }
