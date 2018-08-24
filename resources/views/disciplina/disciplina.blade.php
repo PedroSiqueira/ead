@@ -4,10 +4,8 @@
 @section('sidebar')
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <a href="/disciplina/participantes/{{$disciplina->id}}">Participantes</a>
+    <a href="#">Teste</a>
 </div>
 @endsection
 
@@ -19,27 +17,24 @@
 @section('content')
 <div class="container">
     <h1>{{ $disciplina->nome }}</h1>
-    @if(Auth::check() && Auth::user()->professorDaDisciplina($disciplina->id) && $disciplina->novasInscricoes())
-    <div class="alert alert-info">
-        Novos inscritos! Acesse o menu <a href="#">Participantes</a> para aceitá-los.
-    </div>
-    @endif
     <p>Professor: {{ $disciplina->professor()->name }} • Data de início: {{ strftime('%d/%m/%Y', time($disciplina->inicio)) }} • Data de término: {{ strftime('%d/%m/%Y', time($disciplina->termino)) }}</p>
-    <h3>{!!html_entity_decode($disciplina->descricao)!!}</h3>
-    @if(Auth::guest())
-    <div class="alert alert-warning">Você precisa se <a href="/login">autenticar</a> e estar matriculado para acessar o conteúdo da disciplina...</div>
-    @elseif($tipo==\App\Tipo::ALUNO_INSCRITO)
-    <div class="alert alert-warning">Inscrição realizada com sucesso! Aguarde o professor aceitar tua matrícula...</div>
-    @elseif($tipo==\App\Tipo::NAO_INSCRITO)
-    <a href="/disciplina/matricular/{{ $disciplina->id }}" class="btn btn-primary">Matricular na Disciplina</a>
-    @endif
+    
+    @yield('disciplina_conteudo')
+    
 </div>
 @endsection
 
 @section('script')
 <script>
+    var sidebarOpened = false;
     /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
     function openNav() {
+        if (sidebarOpened) {
+            sidebarOpened = false;
+            closeNav();
+            return;
+        }
+        sidebarOpened = true;
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
     }

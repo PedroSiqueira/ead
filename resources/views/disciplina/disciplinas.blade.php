@@ -16,7 +16,7 @@
                             @endif
                             <a href="/disciplina/ler/{{ $disciplina->id }}" class="btn btn-success"><i class="fas fa-eye"></i> Abrir</a>
                             <a href="/disciplina/editar/{{ $disciplina->id }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</a>
-                            <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</a>
+                            <!--<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</a>-->
                         </span>
                     </li>
                     @endforeach

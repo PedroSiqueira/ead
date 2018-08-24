@@ -15,13 +15,16 @@ Auth::routes();
 
 Route::get('/', 'DisciplinaController@lerDisponiveis');
 
-Route::get('/disciplinas', 'DisciplinaController@lerTodas')->middleware('auth');
-
 Route::get('/disciplina/ler/{id}', 'DisciplinaController@ler');
 
-Route::get('/disciplina/matricular/{id}', 'DisciplinaController@matricular')->middleware('auth');
-
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verificaMail');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/disciplinas', 'DisciplinaController@lerTodas');
+    Route::get('/disciplina/matricular/{id}', 'DisciplinaController@matricular');
+    Route::get('/disciplina/participantes/{id}', 'DisciplinaController@participantes');
+});
+
 
 Route::middleware(['professor'])->group(function () {
     Route::view('/disciplina/novo', 'disciplina.disciplina_formulario');
@@ -29,4 +32,6 @@ Route::middleware(['professor'])->group(function () {
     Route::get('/disciplina/editar/{id}', 'DisciplinaController@editar');
     Route::post('/disciplina/salvar/{id}', 'DisciplinaController@salvar');
 //   Route::get('/disciplina/remover/{id}', 'DisciplinaController@remover');
+    Route::get('/aceitar/{userID}/{discID}', 'DisciplinaController@aceitar');
+    Route::get('/aceitartodos/{discID}', 'DisciplinaController@aceitartodos');
 });

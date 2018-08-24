@@ -53,6 +53,7 @@
 
                             <!-- Right Side Of Navbar -->
                             <div class="navbar-nav ml-auto">
+                                @yield('sidebarMenuButton')
                                 <!-- Authentication Links -->
                                 @guest
                                 <a class="nav-item nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -76,7 +77,6 @@
                                     </div>
                                 </li>
                                 @endguest
-                                @yield('sidebarMenuButton')
                             </div>
                         </div>
                     </div>
