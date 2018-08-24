@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
-
 class LoginController extends Controller {
     /*
       |--------------------------------------------------------------------------
@@ -40,7 +39,7 @@ use AuthenticatesUsers;
     public function authenticated(Request $request, $user) {
         if (!$user->verified) {
             auth()->logout();
-            return redirect('/login')->with('warning', 'Você precisa verificar teu email para confirmar tua conta. Por favor, acesse o link que enviamos para o teu email.');
+            return redirect('/login')->with('status', ['warning', 'Você precisa verificar teu email para confirmar tua conta. Por favor, acesse o link que enviamos para o teu email.']);
         }
         return redirect()->intended($this->redirectPath());
     }

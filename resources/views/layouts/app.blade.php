@@ -8,7 +8,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'EAD_IFMS') }}</title>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -34,7 +34,7 @@
                 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                     <div class="container">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            {{ config('app.name', 'Laravel') }}
+                            {{ config('app.name', 'EAD_IFMS') }}
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
-    document.getElementById('logout-form').submit();">
+                                                   document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
@@ -83,6 +83,17 @@
                 </nav>
 
                 <main class="py-4">
+                    @if (session('status'))
+                    <div class="container">
+                        <div class="alert alert-{{ session('status')[0] }} alert-dismissible fade show">
+                            {{ session('status')[1] }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    @endif
+
                     @yield('content')
                 </main>
 

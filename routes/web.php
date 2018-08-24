@@ -22,9 +22,11 @@ Route::get('/user/verify/{token}', 'Auth\RegisterController@verificaMail');
 Route::middleware(['auth'])->group(function () {
     Route::get('/disciplinas', 'DisciplinaController@lerTodas');
     Route::get('/disciplina/matricular/{id}', 'DisciplinaController@matricular');
-    Route::get('/disciplina/participantes/{id}', 'DisciplinaController@participantes');
 });
 
+Route::middleware(['participante'])->group(function () {
+    Route::get('/disciplina/participantes/{discID}', 'DisciplinaController@participantes');
+});
 
 Route::middleware(['professor'])->group(function () {
     Route::view('/disciplina/novo', 'disciplina.disciplina_formulario');

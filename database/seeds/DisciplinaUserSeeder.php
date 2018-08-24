@@ -118,53 +118,69 @@ class DisciplinaUserSeeder extends Seeder {
 
 
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 5,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 6,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 7,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 8,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 9,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 10,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 11,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 12,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 13,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
         DB::table('disciplina_user')->insert([
-            'disciplina_id' => 1,
+            'disciplina_id' => 3,
             'user_id' => 14,
+            'tipo' => App\Tipo::ALUNO_INSCRITO,
+        ]);
+
+        DB::table('disciplina_user')->insert([
+            'disciplina_id' => 3,
+            'user_id' => 2,
+            'tipo' => App\Tipo::ALUNO_INSCRITO,
+        ]);
+        DB::table('disciplina_user')->insert([
+            'disciplina_id' => 4,
+            'user_id' => 2,
+            'tipo' => App\Tipo::ALUNO_INSCRITO,
+        ]);
+        DB::table('disciplina_user')->insert([
+            'disciplina_id' => 7,
+            'user_id' => 1,
             'tipo' => App\Tipo::ALUNO_INSCRITO,
         ]);
     }
@@ -265,6 +281,22 @@ class DisciplinaUserSeeder extends Seeder {
         DB::table('disciplina_user')->insert([
             'disciplina_id' => 2,
             'user_id' => 14,
+            'tipo' => App\Tipo::ALUNO_MATRICULADO,
+        ]);
+
+        DB::table('disciplina_user')->insert([
+            'disciplina_id' => 2,
+            'user_id' => 2,
+            'tipo' => App\Tipo::ALUNO_MATRICULADO,
+        ]);
+        DB::table('disciplina_user')->insert([
+            'disciplina_id' => 5,
+            'user_id' => 2,
+            'tipo' => App\Tipo::ALUNO_MATRICULADO,
+        ]);
+        DB::table('disciplina_user')->insert([
+            'disciplina_id' => 8,
+            'user_id' => 1,
             'tipo' => App\Tipo::ALUNO_MATRICULADO,
         ]);
     }

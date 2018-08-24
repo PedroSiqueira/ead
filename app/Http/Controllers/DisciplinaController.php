@@ -33,9 +33,6 @@ class DisciplinaController extends Controller {
     }
 
     public function matricular($id) {
-        if (!Auth::check()) {
-            return redirect('/login')->with('warning', 'Você precisa se autenticar no site antes de matricular em uma disciplina.');
-        }
         $du = new \App\DisciplinaUser;
         $du->disciplina_id = $id;
         $du->user_id = Auth::user()->id;
@@ -87,8 +84,8 @@ class DisciplinaController extends Controller {
         return redirect('/disciplina/ler/' . $disciplina->id);
     }
 
-    public function participantes($id) {
-        $disciplina = Disciplina::find($id);
+    public function participantes($discID) {
+        $disciplina = Disciplina::find($discID);
         $matriculados = $disciplina->matriculados()->sortBy('name');
         $inscritos = $disciplina->professor()->id == Auth::user()->id ? $disciplina->inscritos() : null;
         $tipo = \App\DisciplinaUser::select('tipo')->where('user_id', Auth::user()->id)->where('disciplina_id', $disciplina->id)->pluck('tipo')->first();

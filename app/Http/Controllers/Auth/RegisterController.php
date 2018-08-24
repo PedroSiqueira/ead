@@ -80,17 +80,17 @@ use RegistersUsers;
             if (!$user->verified) {
                 $user->verified = true;
                 $user->save();
-                return redirect('/login')->with('success', "Teu email está verificado. Agora você pode se autenticar.");
+                return redirect('/login')->with('status', ['success', "Teu email está verificado. Agora você pode se autenticar."]);
             } else {
-                return redirect('/login')->with('warning', "Seu email já foi verificado. Você pode se autenticar.");
+                return redirect('/login')->with('status', ['warning', "Seu email já foi verificado. Você pode se autenticar."]);
             }
         }
-        return redirect('/login')->with('danger', "Desculpe-me, teu email não pôde ser verificado.");
+        return redirect('/login')->with('status', ["danger", "Desculpe-me, teu email não pôde ser verificado."]);
     }
 
     protected function registered(Request $request, $user) {
         $this->guard()->logout();
-        return redirect('/login')->with('warning', 'Tua conta foi criada! Agora só falta você verificar teu email para confirmar tua conta.');
+        return redirect('/login')->with('status', ['warning', 'Tua conta foi criada! Agora só falta você verificar teu email para confirmar tua conta.']);
     }
 
 }
