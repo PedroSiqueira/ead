@@ -21,6 +21,7 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/disciplina.css') }}" rel="stylesheet">
 
         <!-- Estilo para o menu lateral -->
         <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
@@ -67,7 +68,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">
+    document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 

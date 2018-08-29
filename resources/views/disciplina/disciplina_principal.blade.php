@@ -13,4 +13,10 @@
 @elseif($tipo==\App\Tipo::NAO_INSCRITO)
 <a href="/disciplina/matricular/{{ $disciplina->id }}" class="btn btn-primary">Matricular na Disciplina</a>
 @endif
+<div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 50, "gutter": 1}'>
+  <div class="grid-item">1..ef wef we fwe fwef we f.</div>
+  <div class="grid-item">2.wef wef wef we f..</div>
+  <div class="grid-item">.3 wef wef wefwe..</div>
+  ...
+</div>
 @endsection

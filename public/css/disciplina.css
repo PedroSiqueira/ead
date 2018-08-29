@@ -1,0 +1,7 @@
+.grid-item {
+    margin-bottom: 10px;
+    float: left;
+    width: 500px;
+    background: #e6e5e4;
+    border: 2px solid #b6b5b4;
+}

@@ -4,8 +4,8 @@
 @section('sidebar')
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/disciplina/ler/{{$disciplina->id}}">Conteúdo</a>
     <a href="/disciplina/participantes/{{$disciplina->id}}">Participantes</a>
-    <a href="#">Teste</a>
 </div>
 @endsection
 
@@ -18,14 +18,15 @@
 <div class="container">
     <h1>{{ $disciplina->nome }}</h1>
     <p>Professor: {{ $disciplina->professor()->name }} • Data de início: {{ strftime('%d/%m/%Y', time($disciplina->inicio)) }} • Data de término: {{ strftime('%d/%m/%Y', time($disciplina->termino)) }}</p>
-    
+
     @yield('disciplina_conteudo')
-    
+
 </div>
 @endsection
 
 @section('script')
-<script>
+<script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
+<script defer>
     var sidebarOpened = false;
     /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
     function openNav() {
