@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', 'DisciplinaController@lerDisponiveis');
 
-Route::get('/disciplina/ler/{id}', 'DisciplinaController@ler');
+Route::get('/disciplina/ler/{disciplina_id}/{publicacao_id?}', 'DisciplinaController@ler');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verificaMail');
 
@@ -37,7 +37,7 @@ Route::middleware(['professor'])->group(function () {
     Route::get('/aceitar/{userID}/{discID}', 'DisciplinaController@aceitar');
     Route::get('/aceitartodos/{discID}', 'DisciplinaController@aceitartodos');
 
-    Route::get('/secao/novo/{id}', 'PublicacaoController@novaSecao');
+    Route::get('/secao/novo/{disciplina_id}/{publicacao_id?}', 'PublicacaoController@novaSecao');
     Route::post('/secao/criar', 'PublicacaoController@criarSecao');
     Route::post('/secao/salvar/{id}', 'PublicacaoController@salvarSecao');
     Route::get('/secao/editar/{id}', 'PublicacaoController@editarSecao');

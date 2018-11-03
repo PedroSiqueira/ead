@@ -18,7 +18,7 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ $disciplina->nome }}</h1>
+    <h1>{{ $disciplina->nome }} {{ !empty($publicacao)? ' --> '.$publicacao->titulo : ''}}</h1>
     <p>Professor: {{ $disciplina->professor()->name }} • Data de início: {{ strftime('%d/%m/%Y', time($disciplina->inicio)) }} • Data de término: {{ strftime('%d/%m/%Y', time($disciplina->termino)) }}</p>
 
     @yield('disciplina_conteudo')
@@ -28,23 +28,23 @@
 
 @section('script')
 <script defer>
-        var sidebarOpened = false;
-        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-        function openNav() {
-            if (sidebarOpened) {
-                sidebarOpened = false;
-                closeNav();
-                return;
-            }
-            sidebarOpened = true;
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
+    var sidebarOpened = false;
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+    function openNav() {
+        if (sidebarOpened) {
+            sidebarOpened = false;
+            closeNav();
+            return;
         }
+        sidebarOpened = true;
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
 
-        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-        }
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
 </script>
 @endsection

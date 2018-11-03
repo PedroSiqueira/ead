@@ -5,3 +5,8 @@
     background: #e6e5e4;
     border: 2px solid #b6b5b4;
 }
+
+a.custom-card,
+a.custom-card:hover {
+    color: inherit;
+}

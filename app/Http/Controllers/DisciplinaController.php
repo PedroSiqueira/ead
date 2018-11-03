@@ -23,17 +23,18 @@ class DisciplinaController extends Controller {
         return view('welcome')->with('disciplinas', $disciplinas);
     }
 
-    public function ler($id) {
-        $disciplina = Disciplina::find($id);
+    public function ler($disciplina_id, $publicacao_id = null) {
+        $disciplina = Disciplina::find($disciplina_id);
         $tipo = \App\Tipo::NAO_AUTENTICADO;
         $publicacoes = null;
+        $publicacao = \App\Publicacoes::find($publicacao_id);
         if (Auth::check()) {
             $tipo = \App\DisciplinaUser::select('tipo')->where('user_id', Auth::user()->id)->where('disciplina_id', $disciplina->id)->pluck('tipo')->first();
         }
         if ($tipo == \App\Tipo::ALUNO_MATRICULADO || $tipo == \App\Tipo::PROFESSOR) {
-            $publicacoes = \App\Publicacoes::where('pai', null)->get();
+            $publicacoes = \App\Publicacoes::where('pai', $publicacao_id)->where('disciplina_id', $disciplina_id)->get();
         }
-        return view('disciplina.disciplina_principal', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacoes' => $publicacoes]);
+        return view('disciplina.disciplina_principal', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacoes' => $publicacoes, 'publicacao' => $publicacao]);
     }
 
     public function matricular($id) {

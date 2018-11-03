@@ -15,12 +15,14 @@
 @elseif($tipo==\App\Tipo::ALUNO_MATRICULADO || $tipo==\App\Tipo::PROFESSOR)
 <div class="card-columns">
     @foreach($publicacoes as $pub)
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{ $pub->titulo }}</h5>
-            <p class="card-text"><small class="text-muted">{{ strftime('%d/%m/%Y', time($pub->created_at)) }}</small></p>
+    <a href="/disciplina/ler/{{$disciplina->id}}/{{$pub->id}}" class="custom-card">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ $pub->titulo }}</h5>
+                <p class="card-text"><small class="text-muted">{{ strftime('%d/%m/%Y', time($pub->created_at)) }}</small></p>
+            </div>
         </div>
-    </div>
+    </a>
     @endforeach
 </div>
 @endif
@@ -37,7 +39,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <a href="/secao/novo/{{ $disciplina->id }}" class="btn btn-primary">Nova Seção</a>
+                <a href="/secao/novo/{{ $disciplina->id }}{{ !empty($publicacao)? '/'.$publicacao->id : ''}}" class="btn btn-primary">Nova Seção</a>
                 <a href="/publicacao/novo/{{ $disciplina->id }}" class="btn btn-primary">Nova Publicação</a>
                 <a href="/tarefa/novo/{{ $disciplina->id }}" class="btn btn-primary">Nova Tarefa</a>
             </div>
