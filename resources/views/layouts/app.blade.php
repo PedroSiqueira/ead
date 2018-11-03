@@ -34,6 +34,7 @@
 
                 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                     <div class="container">
+                        @yield('sidebarMenuButton')
                         <a class="navbar-brand" href="{{ url('/') }}">
                             {{ config('app.name', 'EAD_IFMS') }}
                         </a>
@@ -54,7 +55,6 @@
 
                             <!-- Right Side Of Navbar -->
                             <div class="navbar-nav ml-auto">
-                                @yield('sidebarMenuButton')
                                 <!-- Authentication Links -->
                                 @guest
                                 <a class="nav-item nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

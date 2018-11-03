@@ -26,10 +26,14 @@ class DisciplinaController extends Controller {
     public function ler($id) {
         $disciplina = Disciplina::find($id);
         $tipo = \App\Tipo::NAO_AUTENTICADO;
+        $publicacoes = null;
         if (Auth::check()) {
             $tipo = \App\DisciplinaUser::select('tipo')->where('user_id', Auth::user()->id)->where('disciplina_id', $disciplina->id)->pluck('tipo')->first();
         }
-        return view('disciplina.disciplina_principal', ['disciplina' => $disciplina, 'tipo' => $tipo]);
+        if ($tipo == \App\Tipo::ALUNO_MATRICULADO || $tipo == \App\Tipo::PROFESSOR) {
+            $publicacoes = \App\Publicacoes::where('pai', null)->get();
+        }
+        return view('disciplina.disciplina_principal', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacoes' => $publicacoes]);
     }
 
     public function matricular($id) {

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h1>Nova Notícia</h1>
+    <h1>Nova Disciplina</h1>
     <form action="{{ !empty($disciplina)? '/disciplina/salvar/' . $disciplina->id : '/disciplina/criar' }}" method="post">
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
         <div class="form-group">

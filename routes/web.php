@@ -36,4 +36,22 @@ Route::middleware(['professor'])->group(function () {
 //   Route::get('/disciplina/remover/{id}', 'DisciplinaController@remover');
     Route::get('/aceitar/{userID}/{discID}', 'DisciplinaController@aceitar');
     Route::get('/aceitartodos/{discID}', 'DisciplinaController@aceitartodos');
+
+    Route::view('/secao/novo/{id}', 'publicacao.secao_formulario');
+    Route::post('/secao/criar', 'PublicacaoController@criarSecao');
+    Route::post('/secao/salvar/{id}', 'PublicacaoController@salvarSecao');
+    Route::get('/secao/editar/{id}', 'PublicacaoController@editarSecao');
+//    Route::get('/secao/remover/{id}', 'PublicacaoController@removerSecao');
+
+    Route::view('/publicacao/novo/{id}', 'publicacao.publicacao_formulario');
+    Route::post('/publicacao/criar', 'PublicacaoController@criarPublicacao');
+    Route::post('/publicacao/salvar/{id}', 'PublicacaoController@salvarPublicacao');
+    Route::get('/publicacao/editar/{id}', 'PublicacaoController@editarPublicacao');
+//    Route::get('/publicacao/remover/{id}', 'PublicacaoController@removerPublicacao');
+
+    Route::view('/tarefa/novo/{id}', 'publicacao.tarefa_formulario');
+    Route::post('/tarefa/criar', 'PublicacaoController@criarTarefa');
+    Route::post('/tarefa/salvar/{id}', 'PublicacaoController@salvarTarefa');
+    Route::get('/tarefa/editar/{id}', 'PublicacaoController@editarTarefa');
+//    Route::get('/tarefa/remover/{id}', 'PublicacaoController@removerTarefa');
 });

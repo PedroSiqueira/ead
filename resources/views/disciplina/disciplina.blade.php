@@ -10,7 +10,9 @@
 @endsection
 
 @section('sidebarMenuButton')
-<button id='sidebarMenuButton' class="btn btn-outline-primary" onclick="openNav()">&#9776; Menu</button>
+<a class="nav-item nav-link">
+    <button id='sidebarMenuButton' class="btn btn-outline-primary" onclick="openNav()">&#9776; Menu</button>
+</a>
 @endsection
 @endif
 
@@ -25,25 +27,24 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('js/masonry.pkgd.min.js') }}" ></script>
 <script defer>
-    var sidebarOpened = false;
-    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-    function openNav() {
-        if (sidebarOpened) {
-            sidebarOpened = false;
-            closeNav();
-            return;
+        var sidebarOpened = false;
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+        function openNav() {
+            if (sidebarOpened) {
+                sidebarOpened = false;
+                closeNav();
+                return;
+            }
+            sidebarOpened = true;
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
         }
-        sidebarOpened = true;
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
 
-    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
 </script>
 @endsection

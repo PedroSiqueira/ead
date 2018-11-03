@@ -21,6 +21,7 @@ class ProfessorMiddleware {
         if (Auth::user()->professor != 1) {//se nao for professor
             return redirect('/');
         }
+        //todofazer nao basta ser professor, tem que ser professor da disciplina em questao
         return $next($request);
     }
 
