@@ -37,7 +37,7 @@ Route::middleware(['professor'])->group(function () {
     Route::get('/aceitar/{userID}/{discID}', 'DisciplinaController@aceitar');
     Route::get('/aceitartodos/{discID}', 'DisciplinaController@aceitartodos');
 
-    Route::view('/secao/novo/{id}', 'publicacao.secao_formulario');
+    Route::get('/secao/novo/{id}', 'PublicacaoController@novaSecao');
     Route::post('/secao/criar', 'PublicacaoController@criarSecao');
     Route::post('/secao/salvar/{id}', 'PublicacaoController@salvarSecao');
     Route::get('/secao/editar/{id}', 'PublicacaoController@editarSecao');
