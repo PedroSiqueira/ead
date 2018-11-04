@@ -43,11 +43,11 @@ Route::middleware(['professor'])->group(function () {
     Route::get('/secao/editar/{id}', 'PublicacaoController@editarSecao');
 //    Route::get('/secao/remover/{id}', 'PublicacaoController@removerSecao');
 
-    Route::view('/publicacao/novo/{id}', 'publicacao.publicacao_formulario');
-    Route::post('/publicacao/criar', 'PublicacaoController@criarPublicacao');
-    Route::post('/publicacao/salvar/{id}', 'PublicacaoController@salvarPublicacao');
-    Route::get('/publicacao/editar/{id}', 'PublicacaoController@editarPublicacao');
-//    Route::get('/publicacao/remover/{id}', 'PublicacaoController@removerPublicacao');
+    Route::get('/postagem/novo/{disciplina_id}/{publicacao_id?}', 'PublicacaoController@novaPostagem');
+    Route::post('/postagem/criar', 'PublicacaoController@criarPostagem');
+    Route::post('/postagem/salvar/{id}', 'PublicacaoController@salvarPostagem');
+    Route::get('/postagem/editar/{id}', 'PublicacaoController@editarPostagem');
+//    Route::get('/postagem/remover/{id}', 'PublicacaoController@removerPostagem');
 
     Route::view('/tarefa/novo/{id}', 'publicacao.tarefa_formulario');
     Route::post('/tarefa/criar', 'PublicacaoController@criarTarefa');
