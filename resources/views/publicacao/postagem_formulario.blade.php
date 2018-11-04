@@ -11,7 +11,7 @@
             <input name="nome" class="form-control" value="{{ !empty($publicacao)? $publicacao->nome : '' }}"/>
         </div>
         <div class="form-group">
-            <label >Descrição</label>
+            <label >Descrição (Aceita a linguagem de marcação Markdown)</label>
             <textarea name="descricao" class="form-control" rows="3">{{ !empty($publicacao)? $publicacao->descricao : ''}}</textarea>
         </div>
         <div class="form-group">
