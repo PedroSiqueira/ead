@@ -26,15 +26,20 @@ class DisciplinaController extends Controller {
     public function ler($disciplina_id, $publicacao_id = null) {
         $disciplina = Disciplina::find($disciplina_id);
         $tipo = \App\Tipo::NAO_AUTENTICADO;
-        $publicacoes = null;
-        $publicacao = \App\Publicacoes::find($publicacao_id);
         if (Auth::check()) {
             $tipo = \App\DisciplinaUser::select('tipo')->where('user_id', Auth::user()->id)->where('disciplina_id', $disciplina->id)->pluck('tipo')->first();
         }
         if ($tipo == \App\Tipo::ALUNO_MATRICULADO || $tipo == \App\Tipo::PROFESSOR) {
-            $publicacoes = \App\Publicacoes::where('pai', $publicacao_id)->where('disciplina_id', $disciplina_id)->get();
+            $publicacao = \App\Publicacoes::find($publicacao_id);
+            if ($publicacao != null && $publicacao->tipo == \App\TipoPublicacao::POSTAGEM) {
+                $post = \App\Postagem::where('publicacao_id', $publicacao_id)->first();
+                return view('publicacao.postagem', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacao' => $publicacao, 'post' => $post]);
+            } else {
+                $publicacoes = \App\Publicacoes::where('pai', $publicacao_id)->where('disciplina_id', $disciplina_id)->get();
+                return view('publicacao.secao', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacoes' => $publicacoes, 'publicacao' => $publicacao]);
+            }
         }
-        return view('disciplina.disciplina_principal', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacoes' => $publicacoes, 'publicacao' => $publicacao]);
+        return view('disciplina.disciplina_principal', ['disciplina' => $disciplina, 'tipo' => $tipo]);
     }
 
     public function matricular($id) {

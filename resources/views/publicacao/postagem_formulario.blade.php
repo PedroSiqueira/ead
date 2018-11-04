@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h1>{{ !empty($publicacao)? 'Editar Publicação' : 'Criar Publicação' }}</h1>
+    <h1>{{ !empty($publicacao)? 'Editar Postagem' : 'Criar Postagem' }}</h1>
     <form action="{{ !empty($publicacao)? '/postagem/salvar/' . $publicacao->id : '/postagem/criar' }}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
         <input type="hidden" name="disciplina_id" value="{{ $disciplina_id }}" />

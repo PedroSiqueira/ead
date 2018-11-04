@@ -18,17 +18,17 @@ class PublicacaoController extends Controller {
         $pub->titulo = $request->input('nome');
         $pub->tipo = \App\TipoPublicacao::SECAO;
         $pub->disciplina_id = $disciplina_id;
-        $pub->pai = $publicacao_id;
-        $pub->save();
         $routeparam = $disciplina_id;
         if ($publicacao_id) {
+            $pub->pai = $publicacao_id;
             $routeparam .= '/' . $publicacao_id;
         }
+        $pub->save();
         return redirect('/disciplina/ler/' . $routeparam);
     }
 
     public function novaPostagem(Request $request, $disciplina_id, $publicacao_id = null) {
-        return view('publicacao.publicacao_formulario', ['disciplina_id' => $disciplina_id, 'publicacao_id' => $publicacao_id]);
+        return view('publicacao.postagem_formulario', ['disciplina_id' => $disciplina_id, 'publicacao_id' => $publicacao_id]);
     }
 
     public function criarPostagem(Request $request) {
@@ -37,7 +37,7 @@ class PublicacaoController extends Controller {
         DB::transaction(function() use ($request, $disciplina_id, $publicacao_id) {
             $pub = new \App\Publicacoes;
             $pub->titulo = $request->input('nome');
-            $pub->tipo = \App\TipoPublicacao::PUBLICACAO;
+            $pub->tipo = \App\TipoPublicacao::POSTAGEM;
             $pub->disciplina_id = $disciplina_id;
             $pub->pai = $publicacao_id;
             $pub->save();

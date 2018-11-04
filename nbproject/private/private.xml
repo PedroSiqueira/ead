@@ -4,10 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/pedro/projetos/ead/resources/views/publicacao/publicacao_formulario.blade.php</file>
+            <file>file:/home/pedro/projetos/ead/database/seeds/UserSeeder.php</file>
+            <file>file:/home/pedro/projetos/ead/database/seeds/DatabaseSeeder.php</file>
             <file>file:/home/pedro/projetos/ead/database/migrations/2018_11_03_032538_create_publicacoes_table.php</file>
             <file>file:/home/pedro/projetos/ead/routes/web.php</file>
             <file>file:/home/pedro/projetos/ead/resources/views/disciplina/disciplina_principal.blade.php</file>
-            <file>file:/home/pedro/projetos/ead/app/Http/Controllers/PublicacaoController.php</file>
+            <file>file:/home/pedro/projetos/ead/config/database.php</file>
+            <file>file:/home/pedro/projetos/ead/database/seeds/DisciplinaSeeder.php</file>
             <file>file:/home/pedro/projetos/ead/app/Http/Controllers/DisciplinaController.php</file>
         </group>
     </open-files>
