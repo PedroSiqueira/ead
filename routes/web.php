@@ -25,7 +25,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['participante'])->group(function () {
-    Route::get('/disciplina/participantes/{discID}', 'DisciplinaController@participantes');
+    Route::get('/disciplina/participantes/{disciplina_id}', 'DisciplinaController@participantes');
+    Route::post('/tarefa/entregar', 'PublicacaoController@entregarTarefa');
 });
 
 Route::middleware(['professor'])->group(function () {
@@ -34,8 +35,8 @@ Route::middleware(['professor'])->group(function () {
     Route::get('/disciplina/editar/{id}', 'DisciplinaController@editar');
     Route::post('/disciplina/salvar/{id}', 'DisciplinaController@salvar');
 //   Route::get('/disciplina/remover/{id}', 'DisciplinaController@remover');
-    Route::get('/aceitar/{userID}/{discID}', 'DisciplinaController@aceitar');
-    Route::get('/aceitartodos/{discID}', 'DisciplinaController@aceitartodos');
+    Route::get('/aceitar/{userID}/{disciplina_id}', 'DisciplinaController@aceitar');
+    Route::get('/aceitartodos/{disciplina_id}', 'DisciplinaController@aceitartodos');
 
     Route::get('/secao/novo/{disciplina_id}/{publicacao_id?}', 'PublicacaoController@novaSecao');
     Route::post('/secao/criar', 'PublicacaoController@criarSecao');

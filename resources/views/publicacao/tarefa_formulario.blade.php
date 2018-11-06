@@ -15,8 +15,8 @@
             <textarea name="descricao" class="form-control" rows="3">{{ !empty($publicacao)? $publicacao->descricao : ''}}</textarea>
         </div>
         <div class="form-group">
-            <label for="anexo_tarefa" class="btn btn-primary">Selecione um Arquivo de Anexo</label>
-            <input style="display: none;" id="anexo_tarefa" type="file" name="anexo">
+            <label for="anexo_tarefa">Selecione um Arquivo de Anexo</label>
+            <input id="anexo_tarefa" type="file" name="anexo">
         </div>
         <div class="form-row">
             <div class="form-group">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PublicacaoController extends Controller {
 
@@ -80,6 +82,9 @@ class PublicacaoController extends Controller {
             $tarefa->publicacao_id = $pub->id;
             $tarefa->inicio = $request->input('inicio');
             $tarefa->termino = $request->input('termino');
+//            $temp = $request->hasFile('anexo');
+//            $temp = $request->file('anexo')->isValid();
+//            $temp = $request->file('anexo')->getClientOriginalName();
             if ($request->hasFile('anexo') && $request->file('anexo')->isValid()) {
                 $nome_arquivo = $pub->id . '_' . $request->file('anexo')->getClientOriginalName();
                 $tarefa->anexo = $request->file('anexo')->storeAs('public/disciplina' . $disciplina_id . '/tarefas', $nome_arquivo);
@@ -93,6 +98,29 @@ class PublicacaoController extends Controller {
             $routeparam .= '/' . $publicacao_id;
         }
         return redirect('/disciplina/ler/' . $routeparam);
+    }
+
+    public function entregarTarefa(Request $request) {
+        $entrega = \App\TarefaUser::where('tarefa_id', $request->input('tarefa_id'))->where('user_id', Auth::user()->id)->first();
+        if (!$entrega) {
+            $entrega = new \App\TarefaUser;
+            $entrega->user_id = Auth::user()->id;
+            $entrega->tarefa_id = $request->input('tarefa_id');
+        }
+        $entrega->mensagem = $request->input('mensagem');
+//        $temp = $request->hasFile('anexo');
+//        $temp = $request->file('anexo')->isValid();
+//        $temp = $request->file('anexo')->getClientOriginalName();
+        if ($request->hasFile('anexo') && $request->file('anexo')->isValid()) {
+            $nome_arquivo = $entrega->tarefa_id . '_' . $entrega->user_id . '_' . $request->file('anexo')->getClientOriginalName();
+            if ($entrega->anexo) {//se tiver algum anexo, apaga do disco e salva outro
+                Storage::delete($entrega->anexo);
+            }
+
+            $entrega->anexo = $request->file('anexo')->storeAs('public/disciplina' . $request->input('disciplina_id') . '/tarefas/entregas', $nome_arquivo);
+        }
+        $entrega->save();
+        return redirect()->back();
     }
 
 }

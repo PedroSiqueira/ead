@@ -21,8 +21,25 @@
 </div>
 
 @if(Auth::check() && $tipo == \App\Tipo::ALUNO_MATRICULADO)
+<form action="/tarefa/entregar" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+    <input type="hidden" name="tarefa_id" value="{{ $tarefa->id }}" />
+    <input type="hidden" name="disciplina_id" value="{{ $disciplina->id }}" />
+    <div class="form-group">
+        <label>Mensagem para o professor</label>
+        <input name="mensagem" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="upload_tarefa">Adicione aqui teu arquivo</label>
+        <input id="upload_tarefa" type="file" name="anexo">
+    </div>
+    <button type="submit" class="btn btn-primary">Entregar Tarefa</button>
+</form>
+
+
 todofazer parei aqui
-onde o aluno vai submeter o codigo
+professor ver os anexos dos alunos
+
 @endif
 
 @endsection

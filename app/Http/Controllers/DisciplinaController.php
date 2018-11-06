@@ -97,8 +97,8 @@ class DisciplinaController extends Controller {
         return redirect('/disciplina/ler/' . $disciplina->id);
     }
 
-    public function participantes($discID) {
-        $disciplina = Disciplina::find($discID);
+    public function participantes($disciplina_id) {
+        $disciplina = Disciplina::find($disciplina_id);
         $matriculados = $disciplina->matriculados()->sortBy('name');
         $inscritos = $disciplina->professor()->id == Auth::user()->id ? $disciplina->inscritos() : null;
         $tipo = \App\DisciplinaUser::select('tipo')->where('user_id', Auth::user()->id)->where('disciplina_id', $disciplina->id)->pluck('tipo')->first();
@@ -106,15 +106,15 @@ class DisciplinaController extends Controller {
         return view('disciplina.participantes', ['disciplina' => $disciplina, 'inscritos' => $inscritos, 'matriculados' => $matriculados, 'tipo' => $tipo]);
     }
 
-    public function aceitar($userID, $discID) {
-        $du = \App\DisciplinaUser::where('disciplina_id', $discID)->where('user_id', $userID)->first();
+    public function aceitar($userID, $disciplina_id) {
+        $du = \App\DisciplinaUser::where('disciplina_id', $disciplina_id)->where('user_id', $userID)->first();
         $du->tipo = \App\Tipo::ALUNO_MATRICULADO;
         $du->save();
         return back()->withInput();
     }
 
-    public function aceitartodos($discID) {
-        \App\DisciplinaUser::where('disciplina_id', $discID)->where('tipo', \App\Tipo::ALUNO_INSCRITO)->update(['tipo' => \App\Tipo::ALUNO_MATRICULADO]);
+    public function aceitartodos($disciplina_id) {
+        \App\DisciplinaUser::where('disciplina_id', $disciplina_id)->where('tipo', \App\Tipo::ALUNO_INSCRITO)->update(['tipo' => \App\Tipo::ALUNO_MATRICULADO]);
         return back()->withInput();
     }
 

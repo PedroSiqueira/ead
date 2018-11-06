@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/pedro/projetos/ead/resources/views/publicacao/tarefa.blade.php</file>
-            <file>file:/home/pedro/projetos/ead/app/Publicacoes.php</file>
-            <file>file:/home/pedro/projetos/ead/resources/views/publicacao/tarefa_formulario.blade.php</file>
-            <file>file:/home/pedro/projetos/ead/database/migrations/2018_11_05_021126_create_tarefas_table.php</file>
-            <file>file:/home/pedro/projetos/ead/resources/views/publicacao/postagem.blade.php</file>
-            <file>file:/home/pedro/projetos/ead/routes/web.php</file>
-            <file>file:/home/pedro/projetos/ead/app/Http/Controllers/PublicacaoController.php</file>
-            <file>file:/home/pedro/projetos/ead/resources/views/publicacao/secao.blade.php</file>
-            <file>file:/home/pedro/projetos/ead/app/Http/Controllers/DisciplinaController.php</file>
+            <file>file:/C:/Users/pedro/Downloads/projetos/ead/app/Http/Controllers/DisciplinaController.php</file>
+            <file>file:/C:/Users/pedro/Downloads/projetos/ead/resources/views/publicacao/postagem.blade.php</file>
+            <file>file:/C:/Users/pedro/Downloads/projetos/ead/routes/web.php</file>
+            <file>file:/C:/Users/pedro/Downloads/projetos/ead/app/Http/Controllers/PublicacaoController.php</file>
+            <file>file:/C:/Users/pedro/Downloads/projetos/ead/resources/views/publicacao/tarefa.blade.php</file>
         </group>
     </open-files>
 </project-private>
