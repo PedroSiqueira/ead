@@ -36,7 +36,8 @@ class DisciplinaController extends Controller {
                 return view('publicacao.postagem', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacao' => $publicacao, 'post' => $post]);
             } else if ($publicacao != null && $publicacao->tipo == \App\TipoPublicacao::TAREFA) {
                 $tarefa = \App\Tarefa::where('publicacao_id', $publicacao_id)->first();
-                return view('publicacao.tarefa', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacao' => $publicacao, 'tarefa' => $tarefa]);
+                $entrega = $tarefa->entrega(Auth::user()->id);
+                return view('publicacao.tarefa', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacao' => $publicacao, 'tarefa' => $tarefa, 'entrega' => $entrega]);
             } else {
                 $publicacoes = \App\Publicacoes::where('pai', $publicacao_id)->where('disciplina_id', $disciplina_id)->get();
                 return view('publicacao.secao', ['disciplina' => $disciplina, 'tipo' => $tipo, 'publicacoes' => $publicacoes, 'publicacao' => $publicacao]);

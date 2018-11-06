@@ -120,7 +120,7 @@ class PublicacaoController extends Controller {
             $entrega->anexo = $request->file('anexo')->storeAs('public/disciplina' . $request->input('disciplina_id') . '/tarefas/entregas', $nome_arquivo);
         }
         $entrega->save();
-        return redirect()->back();
+        return redirect()->back()->with('status', ['success', 'Tarefa Entregue com Sucesso!']);;
     }
 
 }
