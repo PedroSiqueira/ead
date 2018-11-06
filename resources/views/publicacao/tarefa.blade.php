@@ -3,16 +3,26 @@
 
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title"><i class="far fa-file"></i> {{ $publicacao->titulo }}</h5>
+        <h5 class="card-title"><i class="far fa-edit"></i> {{ $publicacao->titulo }}</h5>
     </div>
     <div class="card-body">
         <div class='markdown_content'>{{$tarefa->descricao}}</div>
-        <p class="card-text"><small class="text-muted">Início: {{ date("d/m/Y", strtotime($publicacao->tarefa->inicio)) }}. Término: {{ date("d/m/Y", strtotime($publicacao->tarefa->termino)) }}</small></p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Início: {{ date("d/m/Y", strtotime($publicacao->tarefa->inicio)) }}</li>
+            <li class="list-group-item">Término: {{ date("d/m/Y", strtotime($publicacao->tarefa->termino)) }}</li>
+            <li class="list-group-item">
+                @if($tarefa->anexo)
+                <a href="{{ Storage::url($tarefa->anexo) }}" class="btn btn-primary">Baixar Anexo: {{basename($tarefa->anexo)}}</a>
+                @endif
+            </li>
+        </ul>
 
     </div>
 </div>
 
-@if($tarefa->anexo)
-<a href="{{ Storage::url($tarefa->anexo) }}">Baixar Anexo: {{basename($tarefa->anexo)}}</a>
+@if(Auth::check() && $tipo == \App\Tipo::ALUNO_MATRICULADO)
+todofazer parei aqui
+onde o aluno vai submeter o codigo
 @endif
+
 @endsection
