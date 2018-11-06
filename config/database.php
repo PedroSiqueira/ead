@@ -50,7 +50,7 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => false,//parou de funcionar do nada, ai alterando essa linha para false voltou a funcionar
+            'strict' => true,//parou de funcionar do nada, ai alterando essa linha para false voltou a funcionar
             'engine' => null,
         ],
 

@@ -6,7 +6,7 @@
     Novos inscritos! Acesse o menu <a href="/disciplina/participantes/{{$disciplina->id}}">Participantes</a> para aceitá-los.
 </div>
 @endif
-<h3>{!!html_entity_decode($disciplina->descricao)!!}</h3>
+<div class='markdown_content'>{{$disciplina->descricao}}</div>
 @if(Auth::guest())
 <div class="alert alert-warning">Você precisa se <a href="/login">autenticar</a> e estar matriculado para acessar o conteúdo da disciplina...</div>
 @elseif($tipo==\App\Tipo::ALUNO_INSCRITO)
@@ -17,4 +17,17 @@
 @yield('publicacao_conteudo')
 @endif
 
+@endsection
+
+
+@section('publicacao_script')
+<script src="{{ asset('js/marked.min.js') }}"></script>
+<script type="text/javascript">
+window.onload = function () {
+    var markdowns = document.getElementsByClassName('markdown_content');
+    for (let i = 0; i < markdowns.length; i++) {
+        markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+    }
+};
+</script>
 @endsection

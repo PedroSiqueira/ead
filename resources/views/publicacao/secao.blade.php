@@ -1,4 +1,4 @@
-@extends('disciplina.disciplina_principal')
+@extends('disciplina.disciplina_conteudo')
 @section('publicacao_conteudo')
 <div class="card-columns">
     @foreach($publicacoes as $pub)
@@ -11,7 +11,12 @@
             @elseif($pub->tipo==\App\TipoPublicacao::POSTAGEM)
             <div class="card-body">
                 <h5 class="card-title"><i class="far fa-file"></i> {{ $pub->titulo }}</h5>
-                <p class="card-text"><small class="text-muted">{{ strftime('%d/%m/%Y', time($pub->created_at)) }}</small></p>
+                <p class="card-text"><small class="text-muted">Postagem: {{ strftime('%d/%m/%Y', time($pub->created_at)) }}</small></p>
+            </div>
+            @elseif($pub->tipo==\App\TipoPublicacao::TAREFA)
+            <div class="card-body">
+                <h5 class="card-title"><i class="fal fa-file-edit"></i> {{ $pub->titulo }}</h5>
+                <p class="card-text"><small class="text-muted">Início: {{ date("d/m/Y", strtotime($pub->tarefa->inicio)) }}. Término: {{ date("d/m/Y", strtotime($pub->tarefa->termino)) }}</small></p>
             </div>
             @endif
         </div>

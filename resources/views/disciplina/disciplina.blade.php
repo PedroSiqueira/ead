@@ -19,7 +19,7 @@
 @section('content')
 <div class="container">
     <h1>{{ $disciplina->nome }} {{ !empty($publicacao)? ' --> '.$publicacao->titulo : ''}}</h1>
-    <p>Professor: {{ $disciplina->professor()->name }} • Data de início: {{ strftime('%d/%m/%Y', time($disciplina->inicio)) }} • Data de término: {{ strftime('%d/%m/%Y', time($disciplina->termino)) }}</p>
+    <p>Professor: {{ $disciplina->professor()->name }} • Data de início: {{ date("d/m/Y", strtotime($disciplina->inicio)) }} • Data de término: {{ date("d/m/Y", strtotime($disciplina->termino)) }}</p>
 
     @yield('disciplina_conteudo')
 

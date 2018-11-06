@@ -49,7 +49,7 @@ Route::middleware(['professor'])->group(function () {
     Route::get('/postagem/editar/{id}', 'PublicacaoController@editarPostagem');
 //    Route::get('/postagem/remover/{id}', 'PublicacaoController@removerPostagem');
 
-    Route::view('/tarefa/novo/{id}', 'publicacao.tarefa_formulario');
+    Route::get('/tarefa/novo/{disciplina_id}/{publicacao_id?}', 'PublicacaoController@novaTarefa');
     Route::post('/tarefa/criar', 'PublicacaoController@criarTarefa');
     Route::post('/tarefa/salvar/{id}', 'PublicacaoController@salvarTarefa');
     Route::get('/tarefa/editar/{id}', 'PublicacaoController@editarTarefa');
