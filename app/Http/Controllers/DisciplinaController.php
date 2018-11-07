@@ -23,6 +23,24 @@ class DisciplinaController extends Controller {
         return view('welcome')->with('disciplinas', $disciplinas);
     }
 
+    public function lerTodas() {
+        $disciplinas = [];
+        $disciplinasProfessor = [];
+        $disciplinasAluno = [];
+        if (Auth::check()) {
+            $disciplinas = Auth::user()->disciplinas;
+        }
+        foreach ($disciplinas as $disciplina) {
+            if ($disciplina->pivot->tipo == \App\Tipo::PROFESSOR) {
+                $disciplinasProfessor[] = $disciplina;
+            } else if ($disciplina->pivot->tipo == \App\Tipo::ALUNO_INSCRITO || $disciplina->pivot->tipo == \App\Tipo::ALUNO_MATRICULADO) {
+                $disciplinasAluno[] = $disciplina;
+            }
+        }
+
+        return view('disciplina.disciplinas', ['disciplinasAluno' => $disciplinasAluno, 'disciplinasProfessor' => $disciplinasProfessor]);
+    }
+
     public function ler($disciplina_id, $publicacao_id = null) {
         $disciplina = Disciplina::find($disciplina_id);
         $tipo = \App\Tipo::NAO_AUTENTICADO;
@@ -46,31 +64,13 @@ class DisciplinaController extends Controller {
         return view('disciplina.disciplina_conteudo', ['disciplina' => $disciplina, 'tipo' => $tipo]);
     }
 
-    public function matricular($id) {
+    public function matricular($disciplina_id) {
         $du = new \App\DisciplinaUser;
-        $du->disciplina_id = $id;
+        $du->disciplina_id = $disciplina_id;
         $du->user_id = Auth::user()->id;
         $du->tipo = \App\Tipo::ALUNO_INSCRITO;
         $du->save();
-        return redirect('/disciplina/ler/' . $id);
-    }
-
-    public function lerTodas() {
-        $disciplinas = [];
-        $disciplinasProfessor = [];
-        $disciplinasAluno = [];
-        if (Auth::check()) {
-            $disciplinas = Auth::user()->disciplinas;
-        }
-        foreach ($disciplinas as $disciplina) {
-            if ($disciplina->pivot->tipo == \App\Tipo::PROFESSOR) {
-                $disciplinasProfessor[] = $disciplina;
-            } else if ($disciplina->pivot->tipo == \App\Tipo::ALUNO_INSCRITO || $disciplina->pivot->tipo == \App\Tipo::ALUNO_MATRICULADO) {
-                $disciplinasAluno[] = $disciplina;
-            }
-        }
-
-        return view('disciplina.disciplinas', ['disciplinasAluno' => $disciplinasAluno, 'disciplinasProfessor' => $disciplinasProfessor]);
+        return redirect('/disciplina/ler/' . $disciplina_id);
     }
 
     public function criar(Request $request) {

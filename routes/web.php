@@ -21,7 +21,7 @@ Route::get('/user/verify/{token}', 'Auth\RegisterController@verificaMail');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/disciplinas', 'DisciplinaController@lerTodas');
-    Route::get('/disciplina/matricular/{id}', 'DisciplinaController@matricular');
+    Route::get('/disciplina/matricular/{disciplina_id}', 'DisciplinaController@matricular');
 });
 
 Route::middleware(['participante'])->group(function () {

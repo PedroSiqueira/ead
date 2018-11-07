@@ -48,8 +48,28 @@
                                 @auth
                                 <a class="nav-item nav-link" href="{{ url('/disciplinas') }}">
                                     Minhas Disciplinas
+                                    <!--{{ Request::route('disciplina_id') }}-->
                                 </a>
                                 @endauth
+                                @if(isset($disciplina_id))
+                                <a class="nav-item nav-link" href="{{ url('/disciplina/ler/'.$disciplina_id) }}">
+                                    {{\App\Disciplina::find($disciplina_id)->nome}}
+                                </a>
+                                @elseif(isset($disciplina))
+                                <a class="nav-item nav-link" href="{{ url('/disciplina/ler/'.$disciplina->id) }}">
+                                    {{$disciplina->nome}}
+                                </a>
+                                @endif
+                                @if(isset($publicacao))
+                                @foreach($publicacao->pais() as $p)
+                                <a class="nav-item nav-link" href="{{ url('/disciplina/ler/'.$disciplina->id.'/'.$p->id) }}">
+                                    {{$p->titulo}}
+                                </a>
+                                @endforeach
+                                <a class="nav-item nav-link" href="{{ url('/disciplina/ler/'.$disciplina->id.'/'.$publicacao->id) }}">
+                                    {{$publicacao->titulo}}
+                                </a>
+                                @endif
                             </div>
 
 

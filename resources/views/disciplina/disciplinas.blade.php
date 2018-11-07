@@ -8,14 +8,14 @@
             <div class="card mb-3">
                 <h5 class="card-header">Disciplinas que ministro</h5>
                 <ul class="list-group list-group-flush">
-                    @foreach($disciplinasProfessor as $disciplina)
-                    <li class="list-group-item">{{ $disciplina->nome }}
+                    @foreach($disciplinasProfessor as $disc)
+                    <li class="list-group-item">{{ $disc->nome }}
                         <span class="float-right">
-                            @if($disciplina->novasInscricoes())
+                            @if($disc->novasInscricoes())
                             <div class="alert alert-info d-inline">Novos inscritos!</div>
                             @endif
-                            <a href="/disciplina/ler/{{ $disciplina->id }}" class="btn btn-success"><i class="fas fa-eye"></i> Abrir</a>
-                            <a href="/disciplina/editar/{{ $disciplina->id }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</a>
+                            <a href="/disciplina/ler/{{ $disc->id }}" class="btn btn-success"><i class="fas fa-eye"></i> Abrir</a>
+                            <a href="/disciplina/editar/{{ $disc->id }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Editar</a>
                             <!--<a href="#" class="btn btn-danger"><i class="fas fa-trash"></i> Apagar</a>-->
                         </span>
                     </li>
@@ -34,10 +34,10 @@
             <div class="card mb-3">
                 <h5 class="card-header">Disciplinas matriculadas</h5>
                 <ul class="list-group list-group-flush">
-                    @foreach($disciplinasAluno as $disciplina)
-                    <li class="list-group-item">{{ $disciplina->nome }}
+                    @foreach($disciplinasAluno as $disc)
+                    <li class="list-group-item">{{ $disc->nome }}
                         <span class="float-right">
-                            <a href="/disciplina/ler/{{ $disciplina->id }}" class="btn btn-success"><i class="fas fa-eye"></i> Abrir</a>
+                            <a href="/disciplina/ler/{{ $disc->id }}" class="btn btn-success"><i class="fas fa-eye"></i> Abrir</a>
                         </span>
                     </li>
                     @endforeach

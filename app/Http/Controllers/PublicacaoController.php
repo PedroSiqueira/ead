@@ -129,8 +129,6 @@ class PublicacaoController extends Controller {
         $entregas = $tarefa->users;
         $zip = new \ZipArchive();
         $zip_name = 'storage/disciplina' . $disciplina_id . '/tarefa' . $tarefa_id . '/download.zip';
-//        $zip_name = 'jovemainda.zip';
-//                $zip_name = public_path() . '/jovemainda.zip';
 
         if ($zip->open($zip_name, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === TRUE) {
             foreach ($entregas as $entrega) {
