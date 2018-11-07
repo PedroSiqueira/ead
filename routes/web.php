@@ -55,4 +55,5 @@ Route::middleware(['professor'])->group(function () {
     Route::post('/tarefa/salvar/{id}', 'PublicacaoController@salvarTarefa');
     Route::get('/tarefa/editar/{id}', 'PublicacaoController@editarTarefa');
 //    Route::get('/tarefa/remover/{id}', 'PublicacaoController@removerTarefa');
+    Route::get('/tarefa/baixar/{disciplina_id}/{tarefa_id}', 'PublicacaoController@baixarTarefa');
 });

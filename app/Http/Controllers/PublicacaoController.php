@@ -112,15 +112,37 @@ class PublicacaoController extends Controller {
 //        $temp = $request->file('anexo')->isValid();
 //        $temp = $request->file('anexo')->getClientOriginalName();
         if ($request->hasFile('anexo') && $request->file('anexo')->isValid()) {
-            $nome_arquivo = $entrega->tarefa_id . '_' . $entrega->user_id . '_' . $request->file('anexo')->getClientOriginalName();
+            $nome_arquivo = $request->file('anexo')->getClientOriginalName();
             if ($entrega->anexo) {//se tiver algum anexo, apaga do disco e salva outro
                 Storage::delete($entrega->anexo);
             }
 
-            $entrega->anexo = $request->file('anexo')->storeAs('public/disciplina' . $request->input('disciplina_id') . '/tarefas/entregas', $nome_arquivo);
+            $entrega->anexo = $request->file('anexo')->storeAs(
+                    'public/disciplina' . $request->input('disciplina_id') . '/tarefa' . $entrega->tarefa_id . '/' . Auth::user()->name, $nome_arquivo);
         }
         $entrega->save();
-        return redirect()->back()->with('status', ['success', 'Tarefa Entregue com Sucesso!']);;
+        return redirect()->back()->with('status', ['success', 'Tarefa Entregue com Sucesso!']);
+    }
+
+    public function baixarTarefa(Request $request, $disciplina_id, $tarefa_id) {
+        $tarefa = \App\Tarefa::find($tarefa_id);
+        $entregas = $tarefa->users;
+        $zip = new \ZipArchive();
+        $zip_name = 'storage/disciplina' . $disciplina_id . '/tarefa' . $tarefa_id . '/download.zip';
+//        $zip_name = 'jovemainda.zip';
+//                $zip_name = public_path() . '/jovemainda.zip';
+
+        if ($zip->open($zip_name, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === TRUE) {
+            foreach ($entregas as $entrega) {
+                $nome_arquivo = 'disciplina' . $disciplina_id . '/' . $entrega->name . '/' . basename(Storage::path($entrega->pivot->anexo));
+                $temp = Storage::path($entrega->pivot->anexo);
+                $temp = file_get_contents($temp);
+                $zip->addFromString($nome_arquivo, $temp);
+//                $zip->addFile(Storage::get($entrega->pivot->anexo), basename(Storage::path($entrega->pivot->anexo)));
+            }
+            $zip->close();
+        }
+        return Storage::download('public/disciplina' . $disciplina_id . '/tarefa' . $tarefa_id . '/download.zip');
     }
 
 }
