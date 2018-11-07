@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TarefaUser extends Model {
 
-    protected $table = 'jogo_user';
+    protected $table = 'tarefa_user';
 
 }

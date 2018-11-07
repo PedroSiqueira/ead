@@ -19,7 +19,7 @@ class CreateTarefaUserTable extends Migration {
             $table->unsignedInteger('tarefa_id');
             $table->foreign('tarefa_id')->references('id')->on('tarefas');
 
-            $table->string('descricao', 4095)->nullable();
+            $table->string('mensagem', 4095)->nullable();
             $table->string('anexo')->nullable();
 
             $table->timestamps();

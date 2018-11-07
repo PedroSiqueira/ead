@@ -9,13 +9,13 @@
                 <h5 class="card-title"><i class="far fa-folder-open"></i> {{ $pub->titulo }}</h5>
             </div>
             @elseif($pub->tipo==\App\TipoPublicacao::POSTAGEM)
-            <div class="card-body bg-light">
+            <div class="card-body">
                 <h5 class="card-title"><i class="far fa-file"></i> {{ $pub->titulo }}</h5>
                 <p class="card-text"><small class="text-muted">Postagem: {{ strftime('%d/%m/%Y', time($pub->created_at)) }}</small></p>
             </div>
             @elseif($pub->tipo==\App\TipoPublicacao::TAREFA)
             <div class="card-body">
-                <h5 class="card-title"><i class="far fa-edit"></i> {{ $pub->titulo }}</h5>
+                <h5 class="card-title"><i class="far fa-edit"></i> <strong>{{ $pub->titulo }}</strong></h5>
                 <p class="card-text"><small class="text-muted">Início: {{ date("d/m/Y", strtotime($pub->tarefa->inicio)) }}. Término: {{ date("d/m/Y", strtotime($pub->tarefa->termino)) }}</small></p>
             </div>
             @endif

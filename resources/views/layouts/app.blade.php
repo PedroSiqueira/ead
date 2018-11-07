@@ -32,7 +32,7 @@
 
             <div id="main">
 
-                <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+                <nav class="navbar navbar-expand-md navbar-light navbar-laravel sticky-top">
                     <div class="container">
                         @yield('sidebarMenuButton')
                         <a class="navbar-brand" href="{{ url('/') }}">
